@@ -42,23 +42,24 @@ body {
 //   height: 60px;
 //   background-color: var(--pri);
 // }
-section.allElems {
+.allElems {
   height: 100%;
   width: 100%;
   padding: 35px;
   padding-top: 50px;
-  background-color: var(--ter1);
+  background-color: var(--sec);
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   gap: 15px;
   overflow: hidden;
+  position: absolute;
 }
 
 .elem {
   background-color: var(--ter2);
   border-radius: 25px;
-  height: 300px;
+  height: 320px;
   width: 270px;
   overflow: hidden;
   position: relative;
@@ -88,27 +89,266 @@ section.allElems {
 .fullElem {
   width: 100%;
   height: 100%;
-  background-color: var(--ter1);
+  background-color: var(--sec);
   padding: 40px;
-  // border-radius: 15px;
-  font-size: 30px;
+  font-size: 25px;
   display: none;
   position: absolute;
+  // z-index: 999;
+  top: 0;
+  left: 0;
   color: white;
-  overflow: hidden;
 }
 
-.back{
+.back {
   position: absolute;
   // top: 20px;
-  right: 5%;
+  right: 3%;
   font-size: 20px;
   cursor: pointer;
-  padding: 10px 11px;
+  padding: 11px 13px;
   border: none;
   border-radius: 50%;
   font-weight: 700;
+  background-color: var(--pri);
+  transition: all ease 0.2s;
 }
-.back:active{
+.back:active {
   scale: 0.9;
+}
+.todo-fullpage {
+  h2 {
+    color: var(--pri);
+    font-size: 60px;
+  }
+  .todo-container {
+    width: 100%;
+    height: 80%;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .addTask {
+      width: 36%;
+      height: 100%;
+      background-color: var(--ter2);
+      border-radius: 15px;
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        align-items: flex-start;
+        input[type="text"] {
+          width: 100%;
+          margin-bottom: 15px;
+          padding: 15px 25px;
+          border-radius: 8px;
+          border: none;
+          font-size: 17px;
+          background-color: var(--pri);
+          outline: none;
+          &::placeholder {
+            color: var(--sec);
+          }
+        }
+        textarea {
+          width: 100%;
+          height: 234px;
+          margin-bottom: 15px;
+          padding: 15px 25px;
+          border-radius: 8px;
+          border: none;
+          font-size: 17px;
+          background-color: var(--pri);
+          outline: none;
+          &::placeholder {
+            color: var(--sec);
+          }
+        }
+        .mark-imp {
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          margin-bottom: 15px;
+          width: 100%;
+          padding: 10px 0;
+          // height: auto;
+          input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            padding: 5px;
+          }
+          label {
+            font-size: 18px;
+            color: var(--sec);
+            font-weight: 500;
+            cursor: pointer;
+          }
+        }
+        button {
+          width: 100%;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 8px;
+          background-color: var(--sec);
+          color: var(--pri);
+          font-size: 18px;
+          font-weight: 700;
+          cursor: pointer;
+          transition: all ease 0.2s;
+          &:active {
+            scale: 0.95;
+          }
+        }
+      }
+    }
+    .allTask {
+      width: 62%;
+      height: 100%;
+      background-color: var(--ter1);
+      border-radius: 15px;
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      align-items: flex-start;
+      overflow: auto;
+      &::-webkit-scrollbar {
+    width: 6px;                        /* thin bar */
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;           /* invisible track */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--ter2);     /* light blue thumb */
+    border-radius: 20px;               /* rounded pill shape */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: var(--pri);      /* cream color on hover */
+  }
+      .task {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 15px 20px;
+        background-color: var(--ter2);
+        border-radius: 8px;
+        h5 {
+          font-size: 22px;
+          color: var(--sec);
+          font-weight: 500;
+          letter-spacing: 0.8px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-start;
+          gap: 10px;
+
+          span {
+            background-color: rgb(193, 58, 58);
+            padding: 3px 6px;
+            border-radius: 5px;
+            color: white;
+            font-size: 13px;
+            font-weight: 500;
+            &.true {
+              opacity: 1;
+            }
+            &.false {
+              opacity: 0;
+            }
+          }
+        }
+        button {
+          padding: 8px 15px;
+          border: none;
+          border-radius: 8px;
+          background-color: var(--sec);
+          color: var(--pri);
+          font-size: 16px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all ease 0.2s;
+          &:active {
+            scale: 0.95;
+          }
+        }
+      }
+    }
+  }
+}
+.daily-fullpage {
+  h2 {
+    color: var(--pri);
+    font-size: 55px;
+  }
+  overflow: hidden;
+  .day-planner {
+    background-color: var(--ter1);
+    height: 85%;
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 9px; /* thin bar */
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent; /* invisible track */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--ter2); /* light blue thumb */
+      border-radius: 20px; /* rounded pill shape */
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--pri); /* cream color on hover */
+    }
+
+    .day-planner-time {
+      padding: 18px 20px;
+      position: relative;
+      width: 49%;
+      // margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      p {
+        position: absolute;
+        top: 17%;
+        left: 5%;
+        color: var(--pri);
+        font-size: 16px;
+        font-weight: 500;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 25px 45px;
+
+        border-radius: 8px;
+        border: none;
+        font-size: 21px;
+        font-weight: 400;
+        word-spacing: 3px;
+        background-color: var(--sec);
+        color: var(--pri);
+        outline: none;
+        &::placeholder {
+          color: var(--pri);
+        }
+      }
+    }
+  }
 }
