@@ -67,30 +67,112 @@ function todoList() {
 todoList();
 
 function dailyPlanner() {
-var dayPlanner = document.querySelector(".day-planner");
-var dayPlannerData = JSON.parse(localStorage.getItem("dayPlannerData")) || {};
-var hours = Array.from(
-  { length: 18 },
-  (_, idx) => `${idx + 6}:00-${idx + 7}:00`,
-);
-var wholeDaySum = "";
-hours.forEach(function (elem, idx) {
-  var savedData = dayPlannerData[idx] || "";
-  wholeDaySum += `  <div class="day-planner-time">
+  var dayPlanner = document.querySelector(".day-planner");
+  var dayPlannerData = JSON.parse(localStorage.getItem("dayPlannerData")) || {};
+  var hours = Array.from(
+    { length: 18 },
+    (_, idx) => `${idx + 6}:00-${idx + 7}:00`,
+  );
+  var wholeDaySum = "";
+  hours.forEach(function (elem, idx) {
+    var savedData = dayPlannerData[idx] || "";
+    wholeDaySum += `  <div class="day-planner-time">
   <p>${elem}</p>
   <input id=${idx} type="text" placeholder="..." value="${savedData}">
           </div>`;
-});
-
-dayPlanner.innerHTML = wholeDaySum;
-
-var dayPlannerInput = document.querySelectorAll(".day-planner input");
-// console.log(dayPlannerInput);
-dayPlannerInput.forEach(function (elem) {
-  elem.addEventListener("input", function () {
-    dayPlannerData[elem.id] = elem.value;
-    localStorage.setItem("dayPlannerData", JSON.stringify(dayPlannerData));
   });
-});
+
+  dayPlanner.innerHTML = wholeDaySum;
+
+  var dayPlannerInput = document.querySelectorAll(".day-planner input");
+  // console.log(dayPlannerInput);
+  dayPlannerInput.forEach(function (elem) {
+    elem.addEventListener("input", function () {
+      dayPlannerData[elem.id] = elem.value;
+      localStorage.setItem("dayPlannerData", JSON.stringify(dayPlannerData));
+    });
+  });
 }
 dailyPlanner();
+
+function motivationalQuote() {
+  var motivationQuote = document.querySelector(".motivation-2 h1");
+  var motivationAuthor = document.querySelector(".motivation-3 h2");
+  async function fetchQuote() {
+    let response = await fetch("https://api.quotable.io/random");
+    let data = await response.json();
+    // console.log(data.content);
+    motivationQuote.innerHTML = data.content;
+    motivationAuthor.innerHTML = `- ${data.author}`;
+  }
+  fetchQuote();
+}
+motivationalQuote();
+
+let timer = document.querySelector(".pomo-timer h1");
+let startBtn = document.querySelector(".start-timer");
+let pauseBtn = document.querySelector(".pause-timer");
+let resetBtn = document.querySelector(".reset-timer");
+let sessionType = document.querySelector(".session");
+let isWorkSession = true;
+let totalSeconds = 25 * 60;
+let timerInterval = null;
+function updateTimer() {
+  let minutes = Math.floor(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+  timer.innerHTML = `${String(minutes).padStart("2", "0")}:${String(seconds).padStart("2", "0")}`;
+  // console.log(minutes,seconds);
+}
+updateTimer();
+
+function startTimer() {
+  clearInterval(timerInterval);
+  if(isWorkSession){
+    timerInterval = setInterval(() => {  
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        updateTimer();
+      }
+      else{
+        isWorkSession = false;
+        clearInterval(timerInterval);
+        sessionType.innerHTML = "Break-Session";
+        sessionType.style.color = 'var(--ter1)';
+        sessionType.style.backgroundColor = 'var(--ter2)';
+        timer.innerHTML = "05:00";
+        totalSeconds = 5 * 60;
+      }
+    }, 1000 );
+  }
+  else{
+    timerInterval = setInterval(() => {  
+      if (totalSeconds > 0) {
+        totalSeconds--;
+        updateTimer();
+      }
+      else{
+        sessionType.innerHTML = "Work-Session";
+        isWorkSession = true;
+        clearInterval(timerInterval);
+        timer.innerHTML = "25:00";
+        totalSeconds = 25 * 60;
+          sessionType.style.color = 'var(--ter2)';
+        sessionType.style.backgroundColor = 'var(--ter1)';
+      }
+    }, 1000);
+  }
+
+}
+startBtn.addEventListener("click", startTimer);
+
+function pauseTimer() {
+  clearInterval(timerInterval);
+}
+pauseBtn.addEventListener("click", pauseTimer);
+
+function resetTimer() {
+  clearInterval(timerInterval);
+  totalSeconds = 25 * 60;
+  updateTimer();
+}
+resetBtn.addEventListener("click", resetTimer);
