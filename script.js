@@ -109,70 +109,191 @@ function motivationalQuote() {
 }
 motivationalQuote();
 
-let timer = document.querySelector(".pomo-timer h1");
-let startBtn = document.querySelector(".start-timer");
-let pauseBtn = document.querySelector(".pause-timer");
-let resetBtn = document.querySelector(".reset-timer");
-let sessionType = document.querySelector(".session");
-let isWorkSession = true;
-let totalSeconds = 25 * 60;
-let timerInterval = null;
-function updateTimer() {
-  let minutes = Math.floor(totalSeconds / 60);
-  let seconds = totalSeconds % 60;
-  timer.innerHTML = `${String(minutes).padStart("2", "0")}:${String(seconds).padStart("2", "0")}`;
-  // console.log(minutes,seconds);
-}
-updateTimer();
-
-function startTimer() {
-  clearInterval(timerInterval);
-  if(isWorkSession){
-    timerInterval = setInterval(() => {  
-      if (totalSeconds > 0) {
-        totalSeconds--;
-        updateTimer();
-      }
-      else{
-        isWorkSession = false;
-        clearInterval(timerInterval);
-        sessionType.innerHTML = "Break-Session";
-        sessionType.style.color = 'var(--ter1)';
-        sessionType.style.backgroundColor = 'var(--ter2)';
-        timer.innerHTML = "05:00";
-        totalSeconds = 5 * 60;
-      }
-    }, 1000 );
+function pomodoroTimer() {
+  let timer = document.querySelector(".pomo-timer h1");
+  let startBtn = document.querySelector(".start-timer");
+  let pauseBtn = document.querySelector(".pause-timer");
+  let resetBtn = document.querySelector(".reset-timer");
+  let sessionType = document.querySelector(".session");
+  let isWorkSession = true;
+  let totalSeconds = 25 * 60;
+  let timerInterval = null;
+  function updateTimer() {
+    let minutes = Math.floor(totalSeconds / 60);
+    let seconds = totalSeconds % 60;
+    timer.innerHTML = `${String(minutes).padStart("2", "0")}:${String(seconds).padStart("2", "0")}`;
+    // console.log(minutes,seconds);
   }
-  else{
-    timerInterval = setInterval(() => {  
-      if (totalSeconds > 0) {
-        totalSeconds--;
-        updateTimer();
-      }
-      else{
-        sessionType.innerHTML = "Work-Session";
-        isWorkSession = true;
-        clearInterval(timerInterval);
-        timer.innerHTML = "25:00";
-        totalSeconds = 25 * 60;
-          sessionType.style.color = 'var(--ter2)';
-        sessionType.style.backgroundColor = 'var(--ter1)';
-      }
-    }, 1000);
-  }
-
-}
-startBtn.addEventListener("click", startTimer);
-
-function pauseTimer() {
-  clearInterval(timerInterval);
-}
-pauseBtn.addEventListener("click", pauseTimer);
-
-function resetTimer() {
-  clearInterval(timerInterval);
-  totalSeconds = 25 * 60;
   updateTimer();
+
+  function startTimer() {
+    clearInterval(timerInterval);
+    if (isWorkSession) {
+      timerInterval = setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimer();
+        } else {
+          isWorkSession = false;
+          clearInterval(timerInterval);
+          sessionType.innerHTML = "Break-Session";
+          sessionType.style.color = "var(--ter1)";
+          sessionType.style.backgroundColor = "var(--ter2)";
+          timer.innerHTML = "05:00";
+          totalSeconds = 5 * 60;
+        }
+      }, 1000);
+    } else {
+      timerInterval = setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimer();
+        } else {
+          sessionType.innerHTML = "Work-Session";
+          isWorkSession = true;
+          clearInterval(timerInterval);
+          timer.innerHTML = "25:00";
+          totalSeconds = 25 * 60;
+          sessionType.style.color = "var(--ter2)";
+          sessionType.style.backgroundColor = "var(--ter1)";
+        }
+      }, 1000);
+    }
+  }
+  startBtn.addEventListener("click", startTimer);
+
+  function pauseTimer() {
+    clearInterval(timerInterval);
+  }
+  pauseBtn.addEventListener("click", pauseTimer);
+
+  function resetTimer() {
+    clearInterval(timerInterval);
+    totalSeconds = 25 * 60;
+    updateTimer();
+  }
+  resetBtn.addEventListener("click", resetTimer);
 }
-resetBtn.addEventListener("click", resetTimer);
+pomodoroTimer();
+
+function weatherWidget() {
+  var city = "Meerut";
+  var apiKey = "11ad5482e2ea4b3397453619261603";
+  var data = null;
+  var header1Time = document.querySelector(".header1 h1");
+  var header1Date = document.querySelector(".header1 h2");
+  var header2Temp = document.querySelector(".header2 h2");
+  var header2Condition = document.querySelector(".header2 h4");
+  // var header1City = document.querySelector(".header1 h4");
+  var header2Precipitation = document.querySelector(".header2 .precipitation");
+  var header2Humidity = document.querySelector(".header2 .humidity");
+  var header2Wind = document.querySelector(".header2 .wind");
+
+  async function weatherAPIcall() {
+    var response = await fetch(
+      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`,
+    );
+
+    data = await response.json();
+    // console.log(data.current.temp_c);
+    header2Temp.innerHTML = `${data.current.temp_c} °C`;
+    header2Condition.innerHTML = `${data.current.condition.text}`;
+    header2Precipitation.innerHTML = `Precipitation: ${data.current.precip_mm} mm`;
+    header2Humidity.innerHTML = `Humidity: ${data.current.humidity} %`;
+    header2Wind.innerHTML = `Wind: ${data.current.wind_kph} Km/hr`;
+  }
+  weatherAPIcall();
+
+  function timeAndDate() {
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    const monthsOfYear = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    var date = new Date();
+    var dayOfWeek = daysOfWeek[date.getDay()];
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var currentDate = date.getDate();
+    var currentMonth = monthsOfYear[date.getMonth()];
+    var year = date.getFullYear();
+    header1Date.innerHTML = `${currentDate} ${currentMonth} ${year}`;
+
+    var ampm = hours >= 12 ? "PM" : "AM";
+    if (hours > 12) {
+      hours = hours - 12;
+    }
+    header1Time.innerHTML = `${dayOfWeek},${String(hours).padStart("2", "0")}:${String(minutes).padStart("2", "0")}:${String(seconds).padStart("2", "0")} ${ampm}`;
+  }
+  setInterval(timeAndDate, 1000);
+}
+weatherWidget();
+
+function changeTheme() {
+  var themeBtn = document.querySelector(".theme");
+var rootElement = document.documentElement;
+var flag = 0;
+
+themeBtn.addEventListener("click", function () {
+  console.log("Hello");
+  if (flag === 0) {
+    rootElement.style.setProperty("--pri", "#9290C3");
+    rootElement.style.setProperty("--ter2", "#535C91");
+    rootElement.style.setProperty("--ter1", "#1B1A55");
+    rootElement.style.setProperty("--sec", "#070F2B");
+     themeBtn.querySelector("i").className = "ri-moon-line";  // add this
+    flag = 1;
+    flag = 1;
+  } else {
+    rootElement.style.setProperty("--pri", " #e2e2b6");
+    rootElement.style.setProperty("--ter2", " #6eacda");
+    rootElement.style.setProperty("--ter1", " #03346e");
+    rootElement.style.setProperty("--sec", " #021526");
+    themeBtn.querySelector("i").className = "ri-sun-line";
+    flag = 0;
+  }
+});
+
+}
+changeTheme();
+
+function changeHeaderImage(){
+  var header = document.querySelector(".allElems header");
+  var hours = new Date().getHours();
+  if (hours >= 5 && hours < 12) {
+    // Morning 5am - 12pm
+     header.style.backgroundImage = "url(./img/sunrise.jpg)";
+    header.style.backgroundSize = "cover";
+    header.style.backgroundPosition = "center";
+  } else if (hours >= 12 && hours < 18) {
+    // Afternoon 12pm - 6pm
+    header.style.backgroundSize = "cover";
+    header.style.backgroundPosition = "top";
+    header.style.backgroundImage = "url(./img/afternoon.jpg)";
+  } else {
+    // Night 6pm - 5am
+    header.style.backgroundImage = "url(./img/night.jpg)";
+    header.style.backgroundSize = "cover";
+    header.style.backgroundPosition = "center";
+  }
+}
+changeHeaderImage();
