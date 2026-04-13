@@ -1,17 +1,14 @@
 <div align="center">
 
-<img src="./img/icons/logo.svg" alt="Logo" width="80" height="80">
-
 # Productivity Dashboard
 
-**A unified, theme-able productivity platform — built entirely with vanilla web technologies.**
+**A unified, theme-able productivity platform - built entirely with vanilla web technologies.**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/Rwtchinu007/productivity-dashboard/releases)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/Rwtchinu007/Productivity-Dashboard/releases)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Rwtchinu007/Productivity-Dashboard/pulls)
 [![Browser Support](https://img.shields.io/badge/browsers-Chrome%20%7C%20Firefox%20%7C%20Safari%20%7C%20Edge-orange.svg)](#browser-support)
 
-[Live Demo](https://Rwtchinu007.github.io/productivity-dashboard) · [Report Bug](https://github.com/Rwtchinu007/productivity-dashboard/issues) · [Request Feature](https://github.com/Rwtchinu007/productivity-dashboard/issues)
+[Live Demo](https://Rwtchinu007.github.io/Productivity-Dashboard/) · [Report Bug](https://github.com/Rwtchinu007/Productivity-Dashboard/issues) · [Request Feature](https://github.com/Rwtchinu007/Productivity-Dashboard/issues)
 
 ![Dashboard Preview](./img/screenshots/demo1.png)
 
@@ -21,22 +18,46 @@
 
 ## Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-  - [Configuration](#configuration)
-- [Usage](#usage)
-- [Architecture](#architecture)
-- [API Reference](#api-reference)
-- [Data Persistence](#data-persistence)
-- [Customization](#customization)
-- [Browser Support](#browser-support)
-- [Roadmap](#roadmap)
-- [Contributing](#contributing)
-- [License](#license)
+- [Productivity Dashboard](#productivity-dashboard)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Quick Start (60 Seconds)](#quick-start-60-seconds)
+  - [Features](#features)
+    - [Task Management](#task-management)
+    - [Daily Planner](#daily-planner)
+    - [Pomodoro Timer](#pomodoro-timer)
+    - [Live Weather Widget](#live-weather-widget)
+    - [Motivational Quotes](#motivational-quotes)
+    - [Time \& Context Awareness](#time--context-awareness)
+    - [Theme System](#theme-system)
+    - [Responsive Design](#responsive-design)
+  - [Tech Stack](#tech-stack)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installation](#installation)
+    - [Configuration](#configuration)
+      - [1. Create your local config](#1-create-your-local-config)
+      - [2. Add your OpenWeather API key](#2-add-your-openweather-api-key)
+  - [Troubleshooting](#troubleshooting)
+  - [Usage](#usage)
+    - [Task Management](#task-management-1)
+    - [Daily Planner](#daily-planner-1)
+    - [Pomodoro Timer](#pomodoro-timer-1)
+    - [Theme Toggle](#theme-toggle)
+  - [Architecture](#architecture)
+  - [API Reference](#api-reference)
+    - [OpenWeatherMap](#openweathermap)
+    - [Quotable](#quotable)
+  - [Data Persistence](#data-persistence)
+  - [Customization](#customization)
+    - [Design Tokens (Light Theme)](#design-tokens-light-theme)
+    - [Dark Theme Tokens](#dark-theme-tokens)
+    - [Custom Fonts](#custom-fonts)
+  - [Browser Support](#browser-support)
+  - [Roadmap](#roadmap)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Acknowledgements](#acknowledgements)
 
 ---
 
@@ -44,11 +65,26 @@
 
 Productivity Dashboard is a zero-dependency, client-side productivity platform that consolidates task management, time-blocking, focus sessions, live weather, and motivational content into a single, beautifully designed interface.
 
-Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build tools, no bundlers. Just open `index.html` and it works.
+Built with **vanilla HTML, CSS, and JavaScript** - no frameworks, no build tools, no bundlers. Just open `index.html` and it works.
 
 > **Why vanilla?** This project demonstrates that a polished, feature-rich product doesn't require a framework. Every interaction is engineered using native browser APIs, keeping the bundle size at exactly zero bytes.
 
 ![Dashboard Features](./img/screenshots/demo2.png)
+
+---
+
+## Quick Start (60 Seconds)
+
+```bash
+git clone https://github.com/Rwtchinu007/Productivity-Dashboard.git
+cd Productivity-Dashboard
+cp config.example.js config.js        # macOS / Linux
+# Copy-Item config.example.js config.js  # Windows PowerShell
+```
+
+1. Open `config.js` and add your OpenWeather API key.
+2. Launch `index.html` in your browser (or use Live Server in VS Code).
+3. Start using tasks, planner, timer, and theme toggle.
 
 ---
 
@@ -61,7 +97,7 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 
 ### Daily Planner
 - Hour-by-hour time-blocking from **6 AM to midnight** (configurable)
-- Autosaves on keystroke — no manual save required
+- Autosaves on keystroke - no manual save required
 - Plans survive page refreshes and browser restarts
 
 ### Pomodoro Timer
@@ -72,7 +108,7 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 ### Live Weather Widget
 - Real-time conditions via **OpenWeatherMap API**
 - Displays temperature, humidity, precipitation, and wind speed
-- City is configurable in `config.js` — defaults to Meerut, IN
+- City is configurable in `config.js` - defaults to Meerut, IN
 
 ### Motivational Quotes
 - Random quotes fetched live from the **Quotable API**
@@ -85,9 +121,9 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 
   | Time Range | Theme |
   |---|---|
-  | 5 AM – 12 PM | Sunrise / Morning |
-  | 12 PM – 6 PM | Afternoon |
-  | 6 PM – 5 AM | Evening / Night |
+  | 5 AM - 12 PM | Sunrise / Morning |
+  | 12 PM - 6 PM | Afternoon |
+  | 6 PM - 5 AM | Evening / Night |
 
 ### Theme System
 - Light / dark toggle with smooth CSS transitions
@@ -96,7 +132,7 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 
 ### Responsive Design
 - Fluid layouts across mobile, tablet, desktop, and 4K (`1600px+`)
-- Fluid typography via `clamp()` — scales without breakpoint hacks
+- Fluid typography via `clamp()` - scales without breakpoint hacks
 - Optimized grid reflow for every viewport
 
 ---
@@ -106,8 +142,8 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 | Layer | Technology |
 |---|---|
 | Markup | HTML5 (semantic) |
-| Styling | CSS3 — Flexbox, Grid, custom properties, `clamp()` |
-| Logic | Vanilla JavaScript (ES6+) — async/await, DOM APIs |
+| Styling | CSS3 - Flexbox, Grid, custom properties, `clamp()` |
+| Logic | Vanilla JavaScript (ES6+) - async/await, DOM APIs |
 | Persistence | `localStorage` API |
 | Weather Data | [OpenWeatherMap API](https://openweathermap.org/api) |
 | Quotes | [Quotable API](https://api.quotable.io) |
@@ -120,21 +156,21 @@ Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build too
 
 ### Prerequisites
 
-- Any modern browser (Chrome, Firefox, Safari, or Edge — latest stable)
+- Any modern browser (Chrome, Firefox, Safari, or Edge - latest stable)
 - An [OpenWeatherMap](https://openweathermap.org/api) API key (free tier)
 - Internet connection for live API data
 
 ### Installation
 
-**Option 1 — Clone**
+**Option 1 - Clone**
 ```bash
-git clone https://github.com/Rwtchinu007/productivity-dashboard.git
-cd productivity-dashboard
+git clone https://github.com/Rwtchinu007/Productivity-Dashboard.git
+cd Productivity-Dashboard
 ```
 
-**Option 2 — Download ZIP**
+**Option 2 - Download ZIP**
 
-Download from [Releases](https://github.com/kshitizrawat/productivity-dashboard/releases) and extract.
+Download from [Releases](https://github.com/Rwtchinu007/Productivity-Dashboard/releases) and extract.
 
 **Run locally**
 ```bash
@@ -182,18 +218,35 @@ Get a free API key at [openweathermap.org/api](https://openweathermap.org/api).
 
 ---
 
+## Troubleshooting
+
+| Problem | Likely Cause | Fix |
+|---|---|---|
+| Weather data not loading | Invalid or missing OpenWeather API key | Open `config.js` and set `WEATHER.API_KEY` with a valid key, then refresh the page. |
+| Weather city not found | City name is misspelled or unsupported | Update `WEATHER.CITY` in `config.js` (try `City,CountryCode`, e.g. `Meerut,IN`). |
+| Quotes not showing | Temporary API/network issue | Refresh once and check your internet. If the issue continues, try again later. |
+| Theme is not changing | Browser cached old JS/CSS | Hard refresh (`Ctrl + F5`) and clear site cache if needed. |
+| Tasks or planner entries disappeared | Browser storage was cleared or private mode used | Use regular browser mode and avoid clearing site data for this app. |
+
+Quick checks:
+- Confirm both `config.js` and `config.example.js` are in the project root.
+- Make sure `config.js` is loaded before `script.js` in `index.html`.
+- Open DevTools Console to inspect runtime errors.
+
+---
+
 ## Usage
 
 ### Task Management
 1. Open the **To-do List** card
 2. Enter a task title, optional details, and set importance if needed
-3. Click **Add Task** — tasks appear instantly below
+3. Click **Add Task** - tasks appear instantly below
 4. Click **Mark as Completed** to remove a finished task
 
 ### Daily Planner
 1. Open the **Daily Planner** card
 2. Click any hourly slot and type your schedule
-3. Changes autosave — no manual action required
+3. Changes autosave - no manual action required
 
 ### Pomodoro Timer
 1. Open the **Pomodoro Timer** card
@@ -209,11 +262,11 @@ Click the ☀️ icon (top-right) to switch between light and dark mode. Your ch
 ## Architecture
 
 ```
-productivity-dashboard/
+Productivity-Dashboard/
 ├── index.html              # Application shell
 ├── style.css               # Design system and component styles
 ├── script.js               # Feature modules and event orchestration
-├── config.js               # Local config — gitignored (create from example)
+├── config.js               # Local config - gitignored (create from example)
 ├── config.example.js       # Committed config template
 ├── fonts/
 │   ├── AeonikTRIAL-Light.otf
@@ -231,9 +284,9 @@ productivity-dashboard/
 ```
 
 **Design principles:**
-- **Single-file modules** — each feature (timer, planner, tasks) is a self-contained function group in `script.js`
-- **Config-driven behaviour** — all tuneable values live in `config.js`, never scattered through logic
-- **Progressive enhancement** — core layout renders instantly; API-dependent widgets populate asynchronously
+- **Single-file modules** - each feature (timer, planner, tasks) is a self-contained function group in `script.js`
+- **Config-driven behaviour** - all tuneable values live in `config.js`, never scattered through logic
+- **Progressive enhancement** - core layout renders instantly; API-dependent widgets populate asynchronously
 
 ---
 
@@ -265,7 +318,7 @@ All user data is stored **locally in the browser** via `localStorage`. Nothing i
 |---|---|---|
 | Tasks | `currentTasks` | JSON array |
 | Daily plans | `dayPlannerData` | JSON object keyed by hour |
-| Theme preference | `theme` | Integer — `0` light, `1` dark |
+| Theme preference | `theme` | Integer - `0` light, `1` dark |
 
 ---
 
@@ -363,26 +416,26 @@ git commit -m "feat: add keyboard navigation to task list"
 
 **Code standards:**
 - 2-space indentation
-- Descriptive variable names — avoid single-letter identifiers outside loop counters
+- Descriptive variable names - avoid single-letter identifiers outside loop counters
 - Comment non-obvious logic
 - Test across Chrome, Firefox, and mobile Safari before submitting
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for the full guidelines.
+If you would like, open an issue first to discuss larger changes before raising a PR.
 
 ---
 
 ## License
 
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for full terms.
+License file is not included in this repository yet. Add a `LICENSE` file before open-source redistribution.
 
 ---
 
 ## Acknowledgements
 
-- [OpenWeatherMap](https://openweathermap.org) — weather data
-- [Quotable](https://api.quotable.io) — quotes API
-- [Remixicon](https://remixicon.com) — icon set
-- [Aeonik TRIAL](https://fontshare.com) — typeface
+- [OpenWeatherMap](https://openweathermap.org) - weather data
+- [Quotable](https://api.quotable.io) - quotes API
+- [Remixicon](https://remixicon.com) - icon set
+- [Aeonik TRIAL](https://fontshare.com) - typeface
 
 ---
 
