@@ -1,0 +1,25 @@
+# Environment and Configuration Files
+config.js
+.env
+.env.local
+.env.production
+
+# Node modules and dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist/
+build/

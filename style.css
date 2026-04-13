@@ -12,6 +12,13 @@
 * Browsers: last 4 version
 */
 
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.14,
+* Autoprefixer: v10.4.7
+* Browsers: last 4 version
+*/
+
 @font-face {
   font-family: aeonik;
   src: url(./fonts/AeonikTRIAL-Light.otf);
@@ -28,10 +35,10 @@
   font-weight: 500;
 }
 :root {
-  --pri: #e2e2b6;
-  --sec: #021526;
-  --ter1: #03346e;
-  --ter2: #6eacda;
+  --pri: #e5e5cb;
+  --sec: #1a120b;
+  --ter1: #3c2a21;
+  --ter2: #d5cea3;
   --white: #fff;
 }
 
@@ -51,7 +58,7 @@ body {
 }
 
 #main {
-  background-color: var(--ter1);
+  background-color: var(--sec);
   width: 100%;
   height: 100%;
 }
@@ -70,19 +77,19 @@ nav {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  background-color: var(--sec);
+  background-color: var(--ter1);
   border-radius: 0 0 25px 25px;
 }
 nav h2 {
   color: var(--white);
-  font-size: 25px;
-  font-weight: 500;
+  font-size: 28px;
+  font-weight: 200;
 }
 nav .theme {
   position: relative;
-  width: 42px;
-  height: 42px;
-  background-color: var(--ter1);
+  width: 44px;
+  height: 44px;
+  background-color: var(--ter2);
   border-radius: 50%;
   cursor: pointer;
   padding: 10px;
@@ -94,8 +101,9 @@ nav .theme:active {
   scale: 0.9;
 }
 nav .theme i {
-  color: var(--pri);
-  font-size: 25px;
+  color: var(--sec);
+  font-size: 28px;
+  font-weight: 100;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -108,8 +116,8 @@ nav .theme i {
 .allElems {
   height: calc(100% - 55px);
   width: 100%;
-  padding: 20px 25px;
-  background-color: var(--ter1);
+  padding: 15px 22px;
+  background-color: var(--sec);
   position: absolute;
   overflow-y: auto;
   overflow-x: hidden;
@@ -136,7 +144,7 @@ nav .theme i {
   padding-bottom: 20px;
 }
 .allElems .allFeatures::-webkit-scrollbar {
-  height: 6px;
+  height: 4px;
 }
 .allElems .allFeatures::-webkit-scrollbar-track {
   background: transparent;
@@ -149,11 +157,11 @@ nav .theme i {
   background-color: var(--pri);
 }
 .allElems header {
-  height: 300px;
+  height: 310px;
   width: 100%;
   background-color: var(--ter1);
   color: var(--white);
-  margin-bottom: 25px;
+  margin-bottom: 35px;
   border-radius: 25px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -169,19 +177,18 @@ nav .theme i {
   /* background-position: top; */
   background-size: cover;
   padding: 10px 25px;
-  
 }
 
 .allElems header .header1 h1 {
-  font-size: 60px;
-  font-weight: 500;
+  font-size: 45px;
+  font-weight: 300;
 }
 .allElems header .header1 h4 {
   font-size: 25px;
   font-weight: 500;
 }
 .allElems header .header1 h2 {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 500;
 }
 .allElems header .header1 {
@@ -198,15 +205,15 @@ nav .theme i {
   gap: 10px;
 }
 .allElems header .header2 h2 {
-  font-size: 60px;
+  font-size: 50px;
   font-weight: 500;
 }
 .allElems header .header2 h3 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 .allElems header .header2 h4 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
 }
 .allElems header .header2 {
@@ -226,11 +233,11 @@ nav .theme i {
 .elem {
   /* background-color: var(--ter2); */
   border-radius: 25px;
-  height: 250px;
-  width: 350px;
+  height: 245px;
+  width: 360px;
   min-width: 350px;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   overflow: hidden;
   position: relative;
   -webkit-transition: all ease 0.3s;
@@ -248,18 +255,19 @@ nav .theme i {
   left: -100%;
   width: 60%;
   height: 100%;
-  background: -webkit-gradient(
-    linear,
-    left top, right top,
-    from(transparent),
-    color-stop(rgba(255, 255, 255, 0.15)),
-    to(transparent)
-  );
   background: -o-linear-gradient(
     left,
     transparent,
     rgba(255, 255, 255, 0.15),
     transparent
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(transparent),
+    color-stop(rgba(255, 255, 255, 0.15)),
+    to(transparent)
   );
   background: linear-gradient(
     to right,
@@ -296,8 +304,9 @@ nav .theme i {
   right: 5%;
   bottom: 4%;
   color: white;
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 23px;
+  font-weight: 300;
+  font-style: italic;
 }
 
 .elem:active {
@@ -412,16 +421,60 @@ nav .theme i {
   input[type="text"]::-ms-input-placeholder {
   color: var(--sec);
 }
-.todo-fullpage .todo-container .addTask form input[type="text"]::-webkit-input-placeholder {
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-webkit-input-placeholder {
   color: var(--sec);
 }
-.todo-fullpage .todo-container .addTask form input[type="text"]::-moz-placeholder {
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-moz-placeholder {
   color: var(--sec);
 }
-.todo-fullpage .todo-container .addTask form input[type="text"]:-ms-input-placeholder {
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]:-ms-input-placeholder {
   color: var(--sec);
 }
-.todo-fullpage .todo-container .addTask form input[type="text"]::-ms-input-placeholder {
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-ms-input-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-webkit-input-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-moz-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]:-ms-input-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  input[type="text"]::-ms-input-placeholder {
   color: var(--sec);
 }
 .todo-fullpage .todo-container .addTask form input[type="text"]::placeholder {
@@ -454,10 +507,27 @@ nav .theme i {
 .todo-fullpage .todo-container .addTask form textarea::-ms-input-placeholder {
   color: var(--sec);
 }
-.todo-fullpage .todo-container .addTask form textarea::-webkit-input-placeholder {
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  textarea::-webkit-input-placeholder {
   color: var(--sec);
 }
 .todo-fullpage .todo-container .addTask form textarea::-moz-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage
+  .todo-container
+  .addTask
+  form
+  textarea::-webkit-input-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage .todo-container .addTask form textarea:-ms-input-placeholder {
+  color: var(--sec);
+}
+.todo-fullpage .todo-container .addTask form textarea::-ms-input-placeholder {
   color: var(--sec);
 }
 .todo-fullpage .todo-container .addTask form textarea::placeholder {
@@ -697,16 +767,52 @@ nav .theme i {
   input[type="text"]::-ms-input-placeholder {
   color: var(--pri);
 }
-.daily-fullpage .day-planner .day-planner-time input[type="text"]::-webkit-input-placeholder {
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-webkit-input-placeholder {
   color: var(--pri);
 }
-.daily-fullpage .day-planner .day-planner-time input[type="text"]::-moz-placeholder {
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-moz-placeholder {
   color: var(--pri);
 }
-.daily-fullpage .day-planner .day-planner-time input[type="text"]:-ms-input-placeholder {
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]:-ms-input-placeholder {
   color: var(--pri);
 }
-.daily-fullpage .day-planner .day-planner-time input[type="text"]::-ms-input-placeholder {
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-ms-input-placeholder {
+  color: var(--pri);
+}
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-webkit-input-placeholder {
+  color: var(--pri);
+}
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-moz-placeholder {
+  color: var(--pri);
+}
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]:-ms-input-placeholder {
+  color: var(--pri);
+}
+.daily-fullpage
+  .day-planner
+  .day-planner-time
+  input[type="text"]::-ms-input-placeholder {
   color: var(--pri);
 }
 .daily-fullpage .day-planner .day-planner-time input[type="text"]::placeholder {
@@ -862,73 +968,124 @@ nav .theme i {
 }
 @media (min-width: 1600px) {
   nav {
-    height: 70px;
-    padding: 25px 40px;
+    height: 72px;
+    padding: 24px 48px;
   }
   nav h2 {
-    font-size: 32px;
+    font-size: clamp(30px, 2vw, 42px);
   }
   nav .theme {
-    width: 50px;
-    height: 50px;
+    width: 52px;
+    height: 52px;
   }
   nav .theme i {
-    font-size: 28px;
+    font-size: 31px;
   }
 
   .allElems {
-    height: calc(100% - 70px); /* match new nav height */
-    padding: 40px;
+    height: calc(100% - 72px);
+    padding: clamp(30px, 2.3vw, 52px);
+  }
+  .allElems .allFeatures {
+    gap: 28px;
+    padding-bottom: 26px;
   }
   .allElems header {
-    height: 370px;
+    height: clamp(360px, 31vh, 450px);
+    padding: 18px 34px;
   }
   .allElems header .header1 h1 {
-    font-size: 80px;
+    font-size: clamp(40px, 4.2vw, 92px);
   }
   .allElems header .header1 h2 {
-    font-size: 30px;
+    font-size: clamp(25px, 1.8vw, 35px);
   }
   .allElems header .header1 h4 {
-    font-size: 28px;
+    font-size: clamp(22px, 1.6vw, 31px);
   }
   .allElems header .header2 h2 {
-    font-size: 70px;
+    font-size: clamp(45px, 3.8vw, 84px);
   }
   .allElems header .header2 h3,
   .allElems header .header2 h4 {
-    font-size: 26px;
+    font-size: clamp(22px, 1.4vw, 28px);
   }
 
   .elem {
-    height: 320px;
-    width: 400px;
-    min-width: 400px;
+    height: clamp(290px, 18vw, 360px);
+    width: clamp(390px, 24vw, 470px);
+    min-width: clamp(390px, 24vw, 470px);
   }
   .elem h2 {
-    font-size: 24px;
+    font-size: clamp(24px, 1.4vw, 30px);
   }
 
-  .pomo-fullpage .pomo-timer h1 {
-    font-size: 220px;
+  .fullElem {
+    padding: clamp(46px, 3vw, 70px);
+    font-size: 30px;
   }
+  .back {
+    font-size: 24px;
+    padding: 13px 16px;
+  }
+
   .pomo-fullpage h1 {
-    font-size: 52px;
+    font-size: clamp(48px, 2.8vw, 65px);
   }
   .todo-fullpage h2 {
-    font-size: 70px;
+    font-size: clamp(58px, 3.6vw, 78px);
   }
   .daily-fullpage h2 {
-    font-size: 65px;
+    font-size: clamp(56px, 3.3vw, 74px);
   }
+
+  .todo-fullpage .todo-container {
+    gap: 26px;
+  }
+  .todo-fullpage .todo-container .addTask form input[type="text"],
+  .todo-fullpage .todo-container .addTask form textarea {
+    font-size: 20px;
+    padding: 18px 28px;
+  }
+  .todo-fullpage .todo-container .addTask form .mark-imp label {
+    font-size: 21px;
+  }
+  .todo-fullpage .todo-container .addTask form button {
+    font-size: 20px;
+    padding: 14px 24px;
+  }
+  .todo-fullpage .todo-container .allTask .task h5 {
+    font-size: 25px;
+  }
+
+  .daily-fullpage .day-planner .day-planner-time p {
+    font-size: 20px;
+  }
+  .daily-fullpage .day-planner .day-planner-time input[type="text"] {
+    font-size: 24px;
+    padding: 30px 52px;
+  }
+
   .moti-fullpage .motivation-container {
-    width: 45%;
-    height: 500px;
+    width: min(50%, 920px);
+    height: clamp(500px, 31vw, 620px);
   }
   .moti-fullpage .motivation-container .motivation-wrapper .motivation-2 h1 {
-    font-size: 38px;
+    font-size: clamp(38px, 2.4vw, 50px);
   }
   .moti-fullpage .motivation-container .motivation-wrapper .motivation-1 h2 {
-    font-size: 28px;
+    font-size: clamp(28px, 1.8vw, 36px);
+  }
+
+  .pomo-fullpage .session {
+    font-size: clamp(26px, 1.5vw, 34px);
+    padding: 10px 22px;
+  }
+  .pomo-fullpage .pomo-timer h1 {
+    font-size: clamp(210px, 12vw, 310px);
+  }
+  .pomo-fullpage .pomo-timer button {
+    font-size: 24px;
+    padding: 14px 30px;
   }
 }

@@ -19,9 +19,9 @@ function openFeatures() {
 openFeatures();
 function todoList() {
   var currentTasks = [];
-  if (localStorage.getItem("currentTasks")) {
+  if (localStorage.getItem(CONFIG.STORAGE_KEYS.TASKS)) {
     // null is falsy value.
-    currentTasks = JSON.parse(localStorage.getItem("currentTasks"));
+    currentTasks = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.TASKS));
   } else {
     console.log("Task List is Empty");
   }
@@ -36,7 +36,10 @@ function todoList() {
     </div>`;
     });
     allTasksDiv.innerHTML = sum;
-    localStorage.setItem("currentTasks", JSON.stringify(currentTasks));
+    localStorage.setItem(
+      CONFIG.STORAGE_KEYS.TASKS,
+      JSON.stringify(currentTasks),
+    );
     var markCompletedBtn = document.querySelectorAll(".task button");
     // console.log(markCompletedBtn);
     markCompletedBtn.forEach(function (btn) {
@@ -68,10 +71,12 @@ todoList();
 
 function dailyPlanner() {
   var dayPlanner = document.querySelector(".day-planner");
-  var dayPlannerData = JSON.parse(localStorage.getItem("dayPlannerData")) || {};
+  var dayPlannerData =
+    JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.DAY_PLANNER)) || {};
   var hours = Array.from(
-    { length: 18 },
-    (_, idx) => `${idx + 6}:00-${idx + 7}:00`,
+    { length: CONFIG.DAILY_PLANNER.TOTAL_HOURS },
+    (_, idx) =>
+      `${idx + CONFIG.DAILY_PLANNER.START_HOUR}:00-${idx + CONFIG.DAILY_PLANNER.START_HOUR + 1}:00`,
   );
   var wholeDaySum = "";
   hours.forEach(function (elem, idx) {
@@ -89,7 +94,10 @@ function dailyPlanner() {
   dayPlannerInput.forEach(function (elem) {
     elem.addEventListener("input", function () {
       dayPlannerData[elem.id] = elem.value;
-      localStorage.setItem("dayPlannerData", JSON.stringify(dayPlannerData));
+      localStorage.setItem(
+        CONFIG.STORAGE_KEYS.DAY_PLANNER,
+        JSON.stringify(dayPlannerData),
+      );
     });
   });
 }
@@ -99,9 +107,9 @@ function motivationalQuote() {
   var motivationQuote = document.querySelector(".motivation-2 h1");
   var motivationAuthor = document.querySelector(".motivation-3 h2");
   async function fetchQuote() {
-    let response = await fetch("https://api.quotable.io/random");
+    let response = await fetch(`${CONFIG.QUOTES.BASE_URL}/random`);
     let data = await response.json();
-    // console.log(data.content);
+    console.log(data.content);
     motivationQuote.innerHTML = data.content;
     motivationAuthor.innerHTML = `- ${data.author}`;
   }
@@ -116,7 +124,7 @@ function pomodoroTimer() {
   let resetBtn = document.querySelector(".reset-timer");
   let sessionType = document.querySelector(".session");
   let isWorkSession = true;
-  let totalSeconds = 25 * 60;
+  let totalSeconds = CONFIG.POMODORO.WORK_DURATION;
   let timerInterval = null;
   function updateTimer() {
     let minutes = Math.floor(totalSeconds / 60);
@@ -139,8 +147,12 @@ function pomodoroTimer() {
           sessionType.innerHTML = "Break-Session";
           sessionType.style.color = "var(--ter1)";
           sessionType.style.backgroundColor = "var(--ter2)";
-          timer.innerHTML = "05:00";
-          totalSeconds = 5 * 60;
+          timer.innerHTML =
+            String(Math.floor(CONFIG.POMODORO.BREAK_DURATION / 60)).padStart(
+              2,
+              "0",
+            ) + ":00";
+          totalSeconds = CONFIG.POMODORO.BREAK_DURATION;
         }
       }, 1000);
     } else {
@@ -152,8 +164,12 @@ function pomodoroTimer() {
           sessionType.innerHTML = "Work-Session";
           isWorkSession = true;
           clearInterval(timerInterval);
-          timer.innerHTML = "25:00";
-          totalSeconds = 25 * 60;
+          timer.innerHTML =
+            String(Math.floor(CONFIG.POMODORO.WORK_DURATION / 60)).padStart(
+              2,
+              "0",
+            ) + ":00";
+          totalSeconds = CONFIG.POMODORO.WORK_DURATION;
           sessionType.style.color = "var(--ter2)";
           sessionType.style.backgroundColor = "var(--ter1)";
         }
@@ -169,7 +185,7 @@ function pomodoroTimer() {
 
   function resetTimer() {
     clearInterval(timerInterval);
-    totalSeconds = 25 * 60;
+    totalSeconds = CONFIG.POMODORO.WORK_DURATION;
     updateTimer();
   }
   resetBtn.addEventListener("click", resetTimer);
@@ -177,8 +193,8 @@ function pomodoroTimer() {
 pomodoroTimer();
 
 function weatherWidget() {
-  var city = "Meerut";
-  var apiKey = "11ad5482e2ea4b3397453619261603";
+  var city = CONFIG.WEATHER.CITY;
+  var apiKey = CONFIG.WEATHER.API_KEY;
   var data = null;
   var header1Time = document.querySelector(".header1 h1");
   var header1Date = document.querySelector(".header1 h2");
@@ -191,16 +207,15 @@ function weatherWidget() {
 
   async function weatherAPIcall() {
     var response = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`,
+      `${CONFIG.WEATHER.BASE_URL}/weather?q=${city}&appid=${apiKey}&units=metric`,
     );
 
     data = await response.json();
-    // console.log(data.current.temp_c);
-    header2Temp.innerHTML = `${data.current.temp_c} °C`;
-    header2Condition.innerHTML = `${data.current.condition.text}`;
-    header2Precipitation.innerHTML = `Precipitation: ${data.current.precip_mm} mm`;
-    header2Humidity.innerHTML = `Humidity: ${data.current.humidity} %`;
-    header2Wind.innerHTML = `Wind: ${data.current.wind_kph} Km/hr`;
+    header2Temp.innerHTML = `${data.main.temp} °C`;
+    header2Condition.innerHTML = `${data.weather[0].description}`;
+    header2Precipitation.innerHTML = `Precipitation: ${data.rain?.["1h"] || 0} mm`;
+    header2Humidity.innerHTML = `Humidity: ${data.main.humidity} %`;
+    header2Wind.innerHTML = `Wind: ${(data.wind.speed * 3.6).toFixed(1)} Km/hr`;
   }
   weatherAPIcall();
 
@@ -250,38 +265,46 @@ weatherWidget();
 
 function changeTheme() {
   var themeBtn = document.querySelector(".theme");
-var rootElement = document.documentElement;
-var flag = 0;
+  var rootElement = document.documentElement;
 
-themeBtn.addEventListener("click", function () {
-  console.log("Hello");
-  if (flag === 0) {
-    rootElement.style.setProperty("--pri", "#9290C3");
-    rootElement.style.setProperty("--ter2", "#535C91");
-    rootElement.style.setProperty("--ter1", "#1B1A55");
-    rootElement.style.setProperty("--sec", "#070F2B");
-     themeBtn.querySelector("i").className = "ri-moon-line";  // add this
-    flag = 1;
-    flag = 1;
-  } else {
-    rootElement.style.setProperty("--pri", " #e2e2b6");
-    rootElement.style.setProperty("--ter2", " #6eacda");
-    rootElement.style.setProperty("--ter1", " #03346e");
-    rootElement.style.setProperty("--sec", " #021526");
-    themeBtn.querySelector("i").className = "ri-sun-line";
-    flag = 0;
+  // Load saved theme from localStorage, default to 0 (light theme)
+  var flag = localStorage.getItem(CONFIG.STORAGE_KEYS.THEME)
+    ? parseInt(localStorage.getItem(CONFIG.STORAGE_KEYS.THEME))
+    : 0;
+
+  function applyTheme() {
+    if (flag === 0) {
+      rootElement.style.setProperty("--pri", "#e5e5cb");
+      rootElement.style.setProperty("--ter2", "#d5cea3");
+      rootElement.style.setProperty("--ter1", "#3c2a21");
+      rootElement.style.setProperty("--sec", "#1a120b");
+      themeBtn.querySelector("i").className = "ri-sun-line";
+    } else {
+      rootElement.style.setProperty("--pri", "#9290C3");
+      rootElement.style.setProperty("--ter2", "#535C91");
+      rootElement.style.setProperty("--ter1", "#1B1A55");
+      rootElement.style.setProperty("--sec", "#070F2B");
+      themeBtn.querySelector("i").className = "ri-moon-line";
+    }
   }
-});
 
+  // Apply saved theme on page load
+  applyTheme();
+
+  themeBtn.addEventListener("click", function () {
+    flag = flag === 0 ? 1 : 0;
+    localStorage.setItem(CONFIG.STORAGE_KEYS.THEME, flag);
+    applyTheme();
+  });
 }
 changeTheme();
 
-function changeHeaderImage(){
+function changeHeaderImage() {
   var header = document.querySelector(".allElems header");
   var hours = new Date().getHours();
   if (hours >= 5 && hours < 12) {
     // Morning 5am - 12pm
-     header.style.backgroundImage = "url(./img/sunrise.jpg)";
+    header.style.backgroundImage = "url(./img/sunrise.jpg)";
     header.style.backgroundSize = "cover";
     header.style.backgroundPosition = "center";
   } else if (hours >= 12 && hours < 18) {
