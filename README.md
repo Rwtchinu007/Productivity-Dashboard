@@ -1,454 +1,395 @@
-# 📊 Productivity Dashboard
+<div align="center">
 
-> A modern, responsive web-based productivity dashboard built with vanilla HTML, CSS, and JavaScript.
+<img src="./img/icons/logo.svg" alt="Logo" width="80" height="80">
 
-A unified platform for managing your daily workflow, tasks, goals, and focus sessions—all in one beautiful, theme-able interface.
+# Productivity Dashboard
+
+**A unified, theme-able productivity platform — built entirely with vanilla web technologies.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-1.0.0-brightgreen.svg)](https://github.com/Rwtchinu007/productivity-dashboard/releases)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Browser Support](https://img.shields.io/badge/browsers-Chrome%20%7C%20Firefox%20%7C%20Safari%20%7C%20Edge-orange.svg)](#browser-support)
+
+[Live Demo](https://Rwtchinu007.github.io/productivity-dashboard) · [Report Bug](https://github.com/Rwtchinu007/productivity-dashboard/issues) · [Request Feature](https://github.com/Rwtchinu007/productivity-dashboard/issues)
 
 ![Dashboard Preview](./img/screenshots/demo1.png)
 
+</div>
+
 ---
 
-## ✨ Features
+## Table of Contents
 
-### 📝 Task Management
-- Create, view, and delete tasks with optional importance flags
-- Real-time task rendering with persistent storage
-- Mark tasks as completed with one click
-- Task details saved in browser localStorage
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Configuration](#configuration)
+- [Usage](#usage)
+- [Architecture](#architecture)
+- [API Reference](#api-reference)
+- [Data Persistence](#data-persistence)
+- [Customization](#customization)
+- [Browser Support](#browser-support)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
 
-### 📅 Daily Planner
-- Hour-by-hour planning from 6 AM to midnight
-- Auto-save to localStorage as you type
-- Responsive layout for all screen sizes
-- Quickly reschedule and reorganize your day
+---
 
-### ⏲️ Pomodoro Timer
-- 25-minute focused work sessions (configurable)
-- 5-minute break intervals (configurable)
-- Visual work/break session indicators
-- Automatic transitions between work and break states
+## Overview
 
-### 💬 Motivational Quotes
-- Random inspirational quotes fetched live from Quotable API
-- Display author attribution for each quote
-- Beautifully styled quote card with blur effect background
-- Fresh quote on every feature load
+Productivity Dashboard is a zero-dependency, client-side productivity platform that consolidates task management, time-blocking, focus sessions, live weather, and motivational content into a single, beautifully designed interface.
 
-### 🌤️ Live Weather Widget
-- Real-time weather data for your city (default: Meerut)
-- Display temperature, conditions, humidity, precipitation, and wind speed
-- Updates automatically on page load
-- Easy configuration for different locations
+Built with **vanilla HTML, CSS, and JavaScript** — no frameworks, no build tools, no bundlers. Just open `index.html` and it works.
 
-### 🌅 Time & Context Awareness
-- Live clock with real-time updates (every second)
-- Full date display with day of week
-- Dynamic header background images based on time of day
-  - 5 AM – 12 PM: Morning (sunrise)
-  - 12 PM – 6 PM: Afternoon
-  - 6 PM – 5 AM: Evening/Night
-
-### 🎨 Theme System
-- Light and dark theme Toggle
-- Semantic color tokens for easy customization
-- Theme preference persists across browser sessions
-- Smooth transitions between themes
-- Responsive icon changes (sun/moon)
-
-### 📱 Responsive Design
-- Fully responsive for mobile, tablet, desktop, and 4K screens
-- Custom breakpoints for 1600px+ (4K optimization)
-- Fluid typography using CSS clamp()
-- Optimized spacing and layout for all viewports
+> **Why vanilla?** This project demonstrates that a polished, feature-rich product doesn't require a framework. Every interaction is engineered using native browser APIs, keeping the bundle size at exactly zero bytes.
 
 ![Dashboard Features](./img/screenshots/demo2.png)
 
 ---
 
-## 🛠️ Tech Stack
+## Features
 
-| Technology | Purpose |
-|---|---|
-| **HTML5** | Semantic markup and structure |
-| **CSS3** | Styling, Flexbox, Grid, media queries |
-| **Vanilla JavaScript (ES6+)** | DOM manipulation, event handling, async operations |
-| **localStorage API** | Client-side data persistence |
-| **OpenWeather API** | Real-time weather data |
-| **Quotable API** | Random inspirational quotes |
-| **Remixicon** | SVG icon library |
+### Task Management
+- Create tasks with optional importance flags and rich detail fields
+- One-click completion with automatic list removal
+- Persistent storage across sessions via `localStorage`
+
+### Daily Planner
+- Hour-by-hour time-blocking from **6 AM to midnight** (configurable)
+- Autosaves on keystroke — no manual save required
+- Plans survive page refreshes and browser restarts
+
+### Pomodoro Timer
+- Configurable work/break intervals (default: 25 min work / 5 min break)
+- Automatic session transitions with visual state indicators
+- Pause and reset controls for flexible focus management
+
+### Live Weather Widget
+- Real-time conditions via **OpenWeatherMap API**
+- Displays temperature, humidity, precipitation, and wind speed
+- City is configurable in `config.js` — defaults to Meerut, IN
+
+### Motivational Quotes
+- Random quotes fetched live from the **Quotable API**
+- Includes author attribution and a glassmorphism-styled card UI
+- Fresh quote surfaced on every module visit
+
+### Time & Context Awareness
+- Live clock updating every second
+- **Dynamic header backgrounds** based on time of day:
+
+  | Time Range | Theme |
+  |---|---|
+  | 5 AM – 12 PM | Sunrise / Morning |
+  | 12 PM – 6 PM | Afternoon |
+  | 6 PM – 5 AM | Evening / Night |
+
+### Theme System
+- Light / dark toggle with smooth CSS transitions
+- Preference persisted across sessions
+- Semantic CSS custom properties for easy token overrides
+
+### Responsive Design
+- Fluid layouts across mobile, tablet, desktop, and 4K (`1600px+`)
+- Fluid typography via `clamp()` — scales without breakpoint hacks
+- Optimized grid reflow for every viewport
 
 ---
 
-## 📂 Project Structure
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Markup | HTML5 (semantic) |
+| Styling | CSS3 — Flexbox, Grid, custom properties, `clamp()` |
+| Logic | Vanilla JavaScript (ES6+) — async/await, DOM APIs |
+| Persistence | `localStorage` API |
+| Weather Data | [OpenWeatherMap API](https://openweathermap.org/api) |
+| Quotes | [Quotable API](https://api.quotable.io) |
+| Icons | [Remixicon](https://remixicon.com) |
+| Typography | Aeonik TRIAL (Light / Regular / Bold) |
+
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Any modern browser (Chrome, Firefox, Safari, or Edge — latest stable)
+- An [OpenWeatherMap](https://openweathermap.org/api) API key (free tier)
+- Internet connection for live API data
+
+### Installation
+
+**Option 1 — Clone**
+```bash
+git clone https://github.com/Rwtchinu007/productivity-dashboard.git
+cd productivity-dashboard
+```
+
+**Option 2 — Download ZIP**
+
+Download from [Releases](https://github.com/kshitizrawat/productivity-dashboard/releases) and extract.
+
+**Run locally**
+```bash
+open index.html          # macOS
+start index.html         # Windows
+xdg-open index.html      # Linux
+```
+
+> **Tip:** Use the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) VS Code extension for hot-reload during development.
+
+### Configuration
+
+#### 1. Create your local config
+
+```bash
+cp config.example.js config.js        # macOS / Linux
+Copy-Item config.example.js config.js  # Windows PowerShell
+```
+
+> ⚠️ `config.js` is gitignored. Never commit real API keys.
+
+#### 2. Add your OpenWeather API key
+
+```javascript
+// config.js
+const CONFIG = {
+  WEATHER: {
+    API_KEY: "your_openweather_api_key_here",
+    CITY: "Meerut",                                      // Change to your city
+    BASE_URL: "https://api.openweathermap.org/data/2.5",
+  },
+  POMODORO: {
+    WORK_DURATION: 25 * 60,   // seconds
+    BREAK_DURATION: 5 * 60,   // seconds
+  },
+  DAILY_PLANNER: {
+    START_HOUR: 6,            // 6 AM
+    END_HOUR: 24,             // Midnight
+    TOTAL_HOURS: 18,
+  },
+};
+```
+
+Get a free API key at [openweathermap.org/api](https://openweathermap.org/api).
+
+---
+
+## Usage
+
+### Task Management
+1. Open the **To-do List** card
+2. Enter a task title, optional details, and set importance if needed
+3. Click **Add Task** — tasks appear instantly below
+4. Click **Mark as Completed** to remove a finished task
+
+### Daily Planner
+1. Open the **Daily Planner** card
+2. Click any hourly slot and type your schedule
+3. Changes autosave — no manual action required
+
+### Pomodoro Timer
+1. Open the **Pomodoro Timer** card
+2. Click **Start** to begin a work session
+3. The session indicator shifts automatically to **Break** when work time ends
+4. Use **Pause** / **Reset** as needed
+
+### Theme Toggle
+Click the ☀️ icon (top-right) to switch between light and dark mode. Your choice persists on the next visit.
+
+---
+
+## Architecture
 
 ```
-DOM Project/
-├── index.html              # Main HTML structure
-├── style.css               # Styling and theming
-├── script.js               # Application logic
-├── config.js               # ⚙️ Local configuration (gitignored)
-├── config.example.js       # 📋 Config template for contributors
-├── .gitignore              # Git ignore rules
-├── .env.example            # ENV variable template
-├── CONFIG_SETUP.md         # Setup documentation
-├── README.md               # This file
+productivity-dashboard/
+├── index.html              # Application shell
+├── style.css               # Design system and component styles
+├── script.js               # Feature modules and event orchestration
+├── config.js               # Local config — gitignored (create from example)
+├── config.example.js       # Committed config template
 ├── fonts/
 │   ├── AeonikTRIAL-Light.otf
 │   ├── AeonikTRIAL-Regular.otf
 │   └── AeonikTRIAL-Bold.otf
 └── img/
-    ├── screenshots/        # Project demo screenshots
-    ├── todo.jpg            # Feature card images
+    ├── screenshots/
+    ├── todo.jpg            # Feature card thumbnails
     ├── goals.jpg
     ├── moto.jpg
     ├── pomo.jpg
-    ├── sunrise.jpg         # Time-based backgrounds
+    ├── sunrise.jpg         # Time-of-day backgrounds
     ├── afternoon.jpg
-    ├── night.jpg
-    └── icons/
-
+    └── night.jpg
 ```
+
+**Design principles:**
+- **Single-file modules** — each feature (timer, planner, tasks) is a self-contained function group in `script.js`
+- **Config-driven behaviour** — all tuneable values live in `config.js`, never scattered through logic
+- **Progressive enhancement** — core layout renders instantly; API-dependent widgets populate asynchronously
 
 ---
 
-## 🚀 Getting Started
+## API Reference
 
-### Prerequisites
-- Modern web browser (Chrome, Firefox, Safari, Edge)
-- Git (optional, for cloning)
-- Internet connection (for live APIs)
+### OpenWeatherMap
 
-### Installation
+| Property | Value |
+|---|---|
+| Endpoint | `GET /data/2.5/weather?q={city}&appid={key}` |
+| Free tier | 1,000 calls / day |
+| Response fields used | `temp`, `weather.description`, `humidity`, `rain`, `wind.speed` |
 
-#### Option 1: Direct Use (No Installation)
-1. Download or clone this repository
-2. Open `index.html` in your browser
-3. Start using the dashboard!
+### Quotable
 
-#### Option 2: Clone from Git
-```bash
-git clone https://github.com/<your-username>/<your-repo-name>.git
-cd DOM\ Project
-open index.html  # macOS
-# or
-start index.html  # Windows
-# or
-xdg-open index.html  # Linux
-```
-
-### Configuration
-
-#### 1. Set Your City (Weather Widget)
-Edit `config.js`:
-```javascript
-WEATHER: {
-  API_KEY: "your-openweather-api-key",
-  CITY: "Meerut",  // Change to your city
-  BASE_URL: "https://api.openweathermap.org/data/2.5",
-}
-```
-
-#### 2. Get Your OpenWeather API Key
-1. Visit [OpenWeatherMap](https://openweathermap.org/api)
-2. Sign up for a free account
-3. Generate an API key
-4. Paste it in `config.js` as shown above
-
-#### 3. Customize Pomodoro Durations
-Edit `config.js`:
-```javascript
-POMODORO: {
-  WORK_DURATION: 25 * 60,    // seconds (25 minutes)
-  BREAK_DURATION: 5 * 60,    // seconds (5 minutes)
-}
-```
-
-#### 4. Adjust Daily Planner Time Range
-Edit `config.js`:
-```javascript
-DAILY_PLANNER: {
-  START_HOUR: 6,   // Planning starts at 6 AM
-  END_HOUR: 24,    // Ends at midnight
-  TOTAL_HOURS: 18, // 18-hour planning window
-}
-```
+| Property | Value |
+|---|---|
+| Endpoint | `GET https://api.quotable.io/random` |
+| Auth | None |
+| Response fields used | `content`, `author` |
 
 ---
 
-## 📖 Usage Guide
+## Data Persistence
 
-### Task Management
-1. Click the **"To do list"** card
-2. Enter task title and optional details
-3. Check **"Mark as Important"** if urgent
-4. Click **"Add Task"**
-5. Tasks appear below; click **"Mark as Completed"** to remove
+All user data is stored **locally in the browser** via `localStorage`. Nothing is transmitted to external servers beyond the two API calls above.
 
-### Daily Planner
-1. Click the **"Daily Planner"** card
-2. Click on any hourly slot and type your plan
-3. Your plan auto-saves as you type
-4. Plans persist across page refreshes
-
-### Pomodoro Timer
-1. Click the **"Pomodoro Timer"** card
-2. Click **"Start"** to begin the 25-minute work session
-3. Session indicator changes to "Break-Session" when work time ends
-4. Click **"Pause"** to pause the timer
-5. Click **"Reset"** to restart
-
-### Motivational Quotes
-1. Click the **"Motivation"** card
-2. A random quote appears with author attribution
-3. Click back to return to dashboard and get a new quote
-
-### Theme Toggle
-- Click the **☀️ sun icon** (top right) to switch themes
-- Your preference is saved and restored on next visit
+| Feature | Storage Key | Format |
+|---|---|---|
+| Tasks | `currentTasks` | JSON array |
+| Daily plans | `dayPlannerData` | JSON object keyed by hour |
+| Theme preference | `theme` | Integer — `0` light, `1` dark |
 
 ---
 
-## 🎨 Customization
+## Customization
 
-### Change Colors
-Edit the CSS custom properties in `:root` block of `style.css`:
+### Design Tokens (Light Theme)
+
+Override CSS custom properties in the `:root` block of `style.css`:
 
 ```css
 :root {
-  --pri: #e5e5cb;   /* Primary accent color */
-  --sec: #1a120b;   /* Secondary dark color */
-  --ter1: #3c2a21;  /* Tertiary color 1 */
-  --ter2: #d5cea3;  /* Tertiary color 2 */
-  --white: #fff;    /* White text/backgrounds */
+  --pri:   #e5e5cb;   /* Primary surface */
+  --sec:   #1a120b;   /* Primary text / dark surface */
+  --ter1:  #3c2a21;   /* Secondary accent */
+  --ter2:  #d5cea3;   /* Secondary surface */
+  --white: #ffffff;
 }
 ```
 
-### Dark Theme Colors
-Modify the dark theme colors in `script.js` inside the `changeTheme()` function:
+### Dark Theme Tokens
+
+Modify inside the `changeTheme()` function in `script.js`:
 
 ```javascript
-else {
-  rootElement.style.setProperty("--pri", "#9290C3");
-  rootElement.style.setProperty("--ter2", "#535C91");
-  rootElement.style.setProperty("--ter1", "#1B1A55");
-  rootElement.style.setProperty("--sec", "#070F2B");
-}
+rootElement.style.setProperty("--pri",  "#9290C3");
+rootElement.style.setProperty("--ter2", "#535C91");
+rootElement.style.setProperty("--ter1", "#1B1A55");
+rootElement.style.setProperty("--sec",  "#070F2B");
 ```
 
-### Change Fonts
-Replace font file paths in `style.css`:
+### Custom Fonts
+
+Replace the `@font-face` declarations in `style.css`:
 
 ```css
 @font-face {
   font-family: aeonik;
   src: url(./fonts/YourFont.otf);
+  font-weight: 400;
 }
 ```
 
 ---
 
-## 🌐 Browser Support
+## Browser Support
 
-| Browser | Version | Status |
+| Browser | Minimum Version | Status |
 |---|---|---|
-| Chrome | Latest | ✅ Fully supported |
-| Firefox | Latest | ✅ Fully supported |
-| Safari | Latest | ✅ Fully supported |
-| Edge | Latest | ✅ Fully supported |
-| Mobile Safari | Latest | ✅ Fully supported |
-| Chrome Mobile | Latest | ✅ Fully supported |
+| Chrome | Latest stable | ✅ Fully supported |
+| Firefox | Latest stable | ✅ Fully supported |
+| Safari | Latest stable | ✅ Fully supported |
+| Edge | Latest stable | ✅ Fully supported |
+| Chrome Mobile | Latest stable | ✅ Fully supported |
+| Mobile Safari | Latest stable | ✅ Fully supported |
 
 ---
 
-## 💾 Data Storage
+## Roadmap
 
-All user data is stored **locally** in your browser using `localStorage`:
+**Near-term**
+- [ ] Data export as CSV / JSON
+- [ ] Keyboard navigation and ARIA label improvements
+- [ ] Offline mode via Service Worker + cache-first strategy
 
-| Feature | Key | Type |
-|---|---|---|
-| Tasks | `currentTasks` | JSON Array |
-| Daily Plans | `dayPlannerData` | JSON Object |
-| Theme Preference | `theme` | Integer (0 = light, 1 = dark) |
+**Mid-term**
+- [ ] Task categories, tags, and priority tiers
+- [ ] Recurring tasks and browser notifications
+- [ ] Module-based JS refactor (ES Modules without a bundler)
 
-**Privacy Note:** No data is sent to external servers (except for API calls to weather and quotes services).
-
----
-
-## ⚠️ Known Limitations & Future Improvements
-
-### Current Limitations
-- Data is browser-specific (not synced across devices)
-- No task categories or priorities (beyond importance flag)
-- Quotes API may have rate limiting
-- No data export functionality
-
-### Planned Improvements
-- [ ] Cloud sync with Firebase/backend
-- [ ] Task categories and tags
-- [ ] Recurring tasks and reminders
-- [ ] Data export as CSV/JSON
-- [ ] Customizable color palettes
-- [ ] Offline mode with service workers
-- [ ] Multi-language support
-- [ ] Mobile app wrapper
-- [ ] Social sharing features
+**Long-term**
+- [ ] Cloud sync via Firebase or a lightweight backend
+- [ ] Customisable colour palette UI
+- [ ] Multi-language (i18n) support
+- [ ] Progressive Web App (PWA) packaging
 
 ---
 
-## 🔧 API Integration Details
+## Contributing
 
-### OpenWeather API
-- **Endpoint:** `https://api.openweathermap.org/data/2.5/weather`
-- **Free Tier:** 1,000 requests/day
-- **Response:** Temperature, humidity, precipitation, wind speed
+Contributions are welcome. Please follow the steps below:
 
-### Quotable API  
-- **Endpoint:** `https://api.quotable.io/random`
-- **Rate Limit:** None (generous)
-- **Response:** Quote text, author, tags
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here's how:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/YourFeature`)
-3. Commit changes (`git commit -m 'Add YourFeature'`)
-4. Push to branch (`git push origin feature/YourFeature`)
-5. Open a Pull Request
-
-### Code Style
-- Use descriptive variable names
-- Indent with 2 spaces
-- Comment complex logic
-- Test across desktop and mobile
-
----
-
-## 📝 License
-
-This project is licensed under the **MIT License** – see the LICENSE file for details.
-
-You are free to use, modify, and distribute this project for personal or commercial purposes.
-
----
-
-## 👤 Author
-
-**Created by:** [Your Name]  
-**GitHub:** [@YourUsername](https://github.com/your-username)  
-**Portfolio:** [your-portfolio.com](https://your-portfolio.com)
-
----
-
-## 🙏 Acknowledgments
-
-- **Remixicon** – Icon library
-- **OpenWeatherMap** – Weather API
-- **Quotable** – Quotes API
-- **Aeonik Font** – Typography
-- Inspired by modern productivity tools
-
----
-
-## 📞 Support
-
-Have questions or found a bug?
-- 📧 Email: [your-email@example.com](mailto:your-email@example.com)
-- 🐛 Report issues on GitHub
-- 💬 Start a discussion in the repo
-
----
-
-**Last Updated:** April 2026  
-**Version:** 1.0.0
-
-### 2. Create your local config
-
-Copy the template and create your local configuration file:
+1. Fork the repository and create a feature branch
 
 ```bash
-cp config.example.js config.js
+git checkout -b feature/your-feature-name
 ```
 
-If you are on Windows PowerShell:
+2. Commit your changes with a clear message
 
-```powershell
-Copy-Item config.example.js config.js
+```bash
+git commit -m "feat: add keyboard navigation to task list"
 ```
 
-### 3. Add your API key
+3. Push to your fork and open a Pull Request against `main`
 
-Open config.js and update:
+**Code standards:**
+- 2-space indentation
+- Descriptive variable names — avoid single-letter identifiers outside loop counters
+- Comment non-obvious logic
+- Test across Chrome, Firefox, and mobile Safari before submitting
 
-- WEATHER.API_KEY
-- WEATHER.CITY (optional)
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for the full guidelines.
 
-### 4. Run the project
-
-This is a static frontend project, so you can:
-
-- Open index.html directly in your browser, or
-- Use Live Server in VS Code for a better dev experience
-
-## Configuration
-
-The app reads settings from config.js:
-
-- Weather API key and city
-- API base URLs
-- Pomodoro durations
-- Planner hour range
-- localStorage key names
-
-## APIs Used
-
-- OpenWeather current weather endpoint
-- Quotable random quote endpoint
-
-## Data Persistence
-
-The app uses localStorage for:
-
-- Current tasks
-- Daily planner entries
-- Theme selection
-
-## Security Notes
-
-- Do not commit real API keys
-- Keep config.js out of version control
-- Use config.example.js as the shared template
-- For production use, move API calls behind a backend proxy
-
-## Deployment (GitHub Pages)
-
-Because this is a static project, deployment is simple:
-
-1. Push your repository to GitHub
-2. Go to repository Settings > Pages
-3. Select branch (usually main) and root folder
-4. Save and use the generated URL
-
-Important:
-
-- Ensure config.js exists in your deployed environment
-- Never deploy with sensitive production keys
-
-## Suggested Improvements
-
-- Add form validation and error handling for APIs
-- Replace inline style updates with CSS class toggles
-- Introduce module-based JS structure
-- Add accessibility improvements (aria labels, keyboard support)
-- Add unit tests for core logic
+---
 
 ## License
 
-This project is open-source and available under the MIT License.
+Distributed under the **MIT License**. See [LICENSE](LICENSE) for full terms.
 
-## Author
+---
 
-Made by Kshiitiz.
+## Acknowledgements
+
+- [OpenWeatherMap](https://openweathermap.org) — weather data
+- [Quotable](https://api.quotable.io) — quotes API
+- [Remixicon](https://remixicon.com) — icon set
+- [Aeonik TRIAL](https://fontshare.com) — typeface
+
+---
+
+<div align="center">
+
+Made with care by **Kshitiz Rawat**
+
+[GitHub](https://github.com/Rwtchinu007) · [Email](mailto:rwtchinu007@gmail.com)
+
+</div>
